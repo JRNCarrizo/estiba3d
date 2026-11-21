@@ -37,6 +37,7 @@ let viewName = "tres";
 let showNumbers = false;
 let showCenter = true;
 let showDims = true;
+let seeThrough = false;
 let allowOverhang = false;
 let placeLevel = 0;
 let dragging = false;
@@ -47,13 +48,45 @@ let hintTimer = 0;
 const labelCache = new Map();
 const numberCache = new Map();
 
-function footprint(rot, kind) {
+function poseOf(rot, kind = "comun") {
+  if (kind === "chata" || kind === "cuatro") {
+    const largo = 2 * BOX.frente;
+    const ancho = kind === "cuatro" ? BOX.h : 2 * BOX.fila;
+    const espesor = BOX.h / 4;
+    if (kind === "cuatro") {
+      if (rot === 2) return { sx: espesor, sz: ancho, h: largo };
+      if (rot === 3) return { sx: ancho, sz: espesor, h: largo };
+      if (rot === 4) return { sx: largo, sz: espesor, h: ancho };
+      if (rot === 5) return { sx: espesor, sz: largo, h: ancho };
+    } else {
+      if (rot === 2) return { sx: espesor, sz: ancho, h: largo };
+      if (rot === 3) return { sx: largo, sz: espesor, h: ancho };
+    }
+    const pose = { sx: largo, sz: ancho, h: espesor };
+    return rot % 2 === 1 ? { sx: pose.sz, sz: pose.sx, h: pose.h } : pose;
+  }
   const frente = kind === "madera" ? BOX.frente * 2 : BOX.frente;
-  return rot === 1 ? { sx: BOX.fila, sz: frente } : { sx: frente, sz: BOX.fila };
+  if (rot === 2 || rot === 3) {
+    const largo = kind === "madera" ? frente : BOX.h;
+    const pose = { sx: largo, sz: BOX.fila, h: BOX.frente };
+    return rot === 3 ? { sx: pose.sz, sz: pose.sx, h: pose.h } : pose;
+  }
+  return rot === 1
+    ? { sx: BOX.fila, sz: frente, h: BOX.h }
+    : { sx: frente, sz: BOX.fila, h: BOX.h };
+}
+
+function isFlat(kind) {
+  return kind === "chata" || kind === "cuatro";
+}
+
+function turnCount(kind) {
+  return kind === "cuatro" ? 6 : 4;
 }
 
 function sizeOf(b) {
-  return footprint(b.rot, b.kind);
+  const pose = poseOf(b.rot, b.kind);
+  return { sx: pose.sx, sz: pose.sz };
 }
 
 function overlapXZ(a, b, pad = 0.25) {
@@ -245,7 +278,7 @@ const PRESETS = [
     id: "libre",
     name: "Modo libre · pallet vacío",
     detail:
-      "Pallet vacío para armar cualquier cantidad. Normal apoya la caja de frente y Atravesada la cruza, desde el rincón de adelante. Encimar sube un piso: la próxima caja se apoya arriba, y si la ponés atravesada, traba.",
+      "Pallet vacío para armar cualquier cantidad. Normal la apoya de frente, Atravesada la cruza y Acostada la tira. Otro doble clic la deja acostada, pero de costado. Dos acostadas, una sobre la otra, equivalen a dos paradas juntas.",
     build: () => [],
   },
   {
@@ -325,6 +358,26 @@ const PRESETS = [
   },
   {
     group: "Norma de armado",
+    id: "e9",
+    name: "9 cajas · base de 3 con traba",
+    detail:
+      "Tres abajo y tres en el medio, paradas. Arriba, una parada y dos acostadas una sobre la otra: llegan casi a la misma altura y traban lo justo para circular.",
+    build: () => {
+      const f = BOX.frente;
+      const x0 = pallet.l / 2;
+      const z = (pallet.w - BOX.fila) / 2;
+      const out = [];
+      for (const level of [0, 1]) {
+        for (let i = 0; i < 3; i++) out.push(spec(x0 + i * f, z, 0, level));
+      }
+      out.push(spec(x0, z, 0, 2));
+      out.push(spec(x0 + f, z, 2, 2));
+      out.push(spec(x0 + f, z, 2, 2));
+      return out;
+    },
+  },
+  {
+    group: "Norma de armado",
     id: "e5",
     name: "5 cajas · base de 3 y 2 arriba",
     detail:
@@ -387,6 +440,20 @@ controls.maxDistance = 1600;
 controls.maxPolarAngle = Math.PI / 2 - 0.05;
 controls.minPolarAngle = 0.12;
 controls.update();
+
+canvas.addEventListener(
+  "wheel",
+  (event) => {
+    if (event.ctrlKey || event.metaKey) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const line = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? canvas.clientHeight : 1;
+    controls._pan(event.deltaX * line * 0.85, event.deltaY * line * 0.85);
+    controls.update();
+    renderer.render(scene, camera);
+  },
+  { passive: false, capture: true }
+);
 
 scene.add(new THREE.HemisphereLight(0xfff6ea, 0xd9cbb8, 0.72));
 const ambient = new THREE.AmbientLight(0xffffff, 0.28);
@@ -637,11 +704,54 @@ function numberTexture(n) {
   return tex;
 }
 
+function cartonQuaternion(rot, kind = "comun") {
+  const q = new THREE.Quaternion();
+  const x = new THREE.Vector3(1, 0, 0);
+  const y = new THREE.Vector3(0, 1, 0);
+  const z = new THREE.Vector3(0, 0, 1);
+  if (rot === 1) q.setFromAxisAngle(y, Math.PI / 2);
+  else if (rot === 2) q.setFromAxisAngle(z, -Math.PI / 2);
+  else if (rot === 3 && kind === "chata") q.setFromAxisAngle(x, -Math.PI / 2);
+  else if (rot === 3) {
+    const qz = new THREE.Quaternion().setFromAxisAngle(z, -Math.PI / 2);
+    const qy = new THREE.Quaternion().setFromAxisAngle(y, Math.PI / 2);
+    q.multiplyQuaternions(qy, qz);
+  } else if (rot === 4 && kind === "cuatro") q.setFromAxisAngle(x, -Math.PI / 2);
+  else if (rot === 5 && kind === "cuatro") {
+    const qx = new THREE.Quaternion().setFromAxisAngle(x, -Math.PI / 2);
+    const qy = new THREE.Quaternion().setFromAxisAngle(y, Math.PI / 2);
+    q.multiplyQuaternions(qy, qx);
+  }
+  return q;
+}
+
+function cartonTurnFits(kind, rot) {
+  if (!rot) return true;
+  const stand = poseOf(0, kind);
+  const posed = poseOf(rot, kind);
+  const q = cartonQuaternion(rot, kind);
+  const ex = new THREE.Vector3(stand.sx, 0, 0).applyQuaternion(q);
+  const ey = new THREE.Vector3(0, stand.h, 0).applyQuaternion(q);
+  const ez = new THREE.Vector3(0, 0, stand.sz).applyQuaternion(q);
+  const near = (a, b) => Math.abs(a - b) < 0.2;
+  return (
+    near(Math.abs(ex.x) + Math.abs(ey.x) + Math.abs(ez.x), posed.sx) &&
+    near(Math.abs(ex.y) + Math.abs(ey.y) + Math.abs(ez.y), posed.h) &&
+    near(Math.abs(ex.z) + Math.abs(ey.z) + Math.abs(ez.z), posed.sz)
+  );
+}
+
 function createBoxGroup(b) {
-  const { sx, sz } = sizeOf(b);
+  const stand = poseOf(0, b.kind);
+  const turned = cartonTurnFits(b.kind, b.rot);
+  const sx = turned ? stand.sx : sizeOf(b).sx;
+  const sz = turned ? stand.sz : sizeOf(b).sz;
+  const h = turned ? stand.h : b.h;
+  const turn = turned ? cartonQuaternion(b.rot, b.kind) : new THREE.Quaternion();
   const group = new THREE.Group();
+  const inner = new THREE.Group();
   group.userData.boxId = b.id;
-  const geo = new THREE.BoxGeometry(sx - 0.3, b.h - 0.06, sz - 0.3);
+  const geo = new THREE.BoxGeometry(sx - 0.3, h - 0.06, sz - 0.3);
   const body = new THREE.MeshStandardMaterial({
     color: b.color,
     roughness: 0.84,
@@ -650,24 +760,56 @@ function createBoxGroup(b) {
   const mesh = new THREE.Mesh(geo, body);
   mesh.castShadow = true;
   mesh.receiveShadow = true;
-  group.add(mesh);
-  group.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo), edgeMat));
+  inner.add(mesh);
+  const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geo), edgeMat);
+  edges.renderOrder = 3;
+  inner.add(edges);
 
   const sel = new THREE.LineSegments(new THREE.EdgesGeometry(geo), selMat);
   sel.scale.setScalar(1.035);
+  sel.renderOrder = 4;
   sel.visible = false;
-  group.add(sel);
+  inner.add(sel);
 
-  const longIsX = sx > sz;
-  const seam = new THREE.Mesh(
-    new THREE.BoxGeometry(longIsX ? sx * 0.72 : 0.4, 0.14, longIsX ? 0.4 : sz * 0.72),
-    new THREE.MeshStandardMaterial({ color: 0x3a2c22, roughness: 1 })
-  );
-  seam.position.y = (b.h - 0.06) / 2 + 0.02;
-  group.add(seam);
+  if (!isFlat(b.kind)) {
+    const longIsX = sx > sz;
+    const seam = new THREE.Mesh(
+      new THREE.BoxGeometry(longIsX ? sx * 0.72 : 0.4, 0.14, longIsX ? 0.4 : sz * 0.72),
+      new THREE.MeshStandardMaterial({ color: 0x3a2c22, roughness: 1 })
+    );
+    seam.position.y = (h - 0.06) / 2 + 0.02;
+    inner.add(seam);
+  }
 
-  const labelH = Math.min(b.h * 0.4, 14);
-  const sticker = (geo, rotY, x, y, z) => {
+  if (isFlat(b.kind)) {
+    const bottles = b.kind === "cuatro" ? 4 : 6;
+    const step = sz / bottles;
+    for (let i = 1; i < bottles; i++) {
+      const groove = new THREE.Mesh(
+        new THREE.BoxGeometry(sx * 0.78, 0.1, 0.35),
+        new THREE.MeshStandardMaterial({ color: 0x3a2c22, roughness: 1 })
+      );
+      groove.position.z = -sz / 2 + i * step;
+      groove.position.y = (h - 0.06) / 2 + 0.03;
+      inner.add(groove);
+    }
+    const topLabel = new THREE.Mesh(
+      new THREE.PlaneGeometry(Math.min(Math.max(sx, sz) * 0.42, 26), Math.min(Math.min(sx, sz) * 0.38, 12)),
+      new THREE.MeshBasicMaterial({ map: labelTexture(b.label) })
+    );
+    topLabel.rotation.x = -Math.PI / 2;
+    topLabel.position.y = (h - 0.06) / 2 + 0.12;
+    topLabel.userData.isLabel = true;
+    inner.add(topLabel);
+  }
+
+  const labelH = Math.min(isFlat(b.kind) ? h * 0.62 : h * 0.4, 14);
+  const facePointsUp = (nx, ny, nz) => {
+    if (!turned || b.rot < 2) return true;
+    return new THREE.Vector3(nx, ny, nz).applyQuaternion(turn).y > -0.5;
+  };
+  const sticker = (geo, rotY, x, y, z, normal) => {
+    if (!facePointsUp(...normal)) return;
     const m = new THREE.Mesh(
       geo,
       new THREE.MeshBasicMaterial({ map: labelTexture(b.label) })
@@ -675,17 +817,17 @@ function createBoxGroup(b) {
     m.position.set(x, y, z);
     m.rotation.y = rotY;
     m.userData.isLabel = true;
-    group.add(m);
+    inner.add(m);
   };
-  const hy = b.kind === "madera" ? b.h * 0.12 : 0;
+  const hy = b.kind === "madera" ? h * 0.12 : 0;
   const faceX = new THREE.PlaneGeometry(Math.min(sz * 0.72, 18), labelH);
   const faceZ = new THREE.PlaneGeometry(Math.min(sx * 0.72, 18), labelH);
   const xf = (sx - 0.3) / 2 + 0.12;
   const zf = (sz - 0.3) / 2 + 0.12;
-  sticker(faceZ, 0, 0, hy, zf);
-  sticker(faceZ, Math.PI, 0, hy, -zf);
-  sticker(faceX, Math.PI / 2, xf, hy, 0);
-  sticker(faceX, -Math.PI / 2, -xf, hy, 0);
+  sticker(faceZ, 0, 0, hy, zf, [0, 0, 1]);
+  sticker(faceZ, Math.PI, 0, hy, -zf, [0, 0, -1]);
+  sticker(faceX, Math.PI / 2, xf, hy, 0, [1, 0, 0]);
+  sticker(faceX, -Math.PI / 2, -xf, hy, 0, [-1, 0, 0]);
 
   if (b.kind === "madera") {
     for (const t of [-0.22, 0.22]) {
@@ -693,17 +835,20 @@ function createBoxGroup(b) {
         new THREE.BoxGeometry(sx + 0.08, 0.45, sz + 0.08),
         new THREE.MeshStandardMaterial({ color: 0x4a3424, roughness: 1 })
       );
-      band.position.y = b.h * t;
-      group.add(band);
+      band.position.y = h * t;
+      inner.add(band);
     }
     const alongX = sx >= sz;
     const joint = new THREE.Mesh(
       new THREE.BoxGeometry(alongX ? 0.45 : sx * 0.9, 0.22, alongX ? sz * 0.9 : 0.45),
       new THREE.MeshStandardMaterial({ color: 0x3a2c22, roughness: 1 })
     );
-    joint.position.y = (b.h - 0.06) / 2 + 0.05;
-    group.add(joint);
+    joint.position.y = (h - 0.06) / 2 + 0.05;
+    inner.add(joint);
   }
+
+  inner.quaternion.copy(turn);
+  group.add(inner);
 
   const num = new THREE.Sprite(
     new THREE.SpriteMaterial({ map: numberTexture(1), transparent: true, depthTest: false })
@@ -772,7 +917,12 @@ function makeBox(item) {
     y: pallet.h + (item.level || 0) * BOX.h,
     z: item.z,
     rot: item.rot || 0,
-    h: item.h && kind !== "madera" ? item.h : BOX.h,
+    h:
+      isFlat(kind) || item.rot >= 2
+        ? poseOf(item.rot || 0, kind).h
+        : item.h && kind !== "madera"
+          ? item.h
+          : BOX.h,
     kind,
     color: item.color || paint.color,
     label: item.label || "",
@@ -823,20 +973,40 @@ function renumber() {
 }
 
 function updateLooks() {
+  edgeMat.transparent = seeThrough;
+  edgeMat.opacity = 1;
+  edgeMat.depthWrite = true;
+  edgeMat.needsUpdate = true;
+  selMat.transparent = seeThrough;
+  selMat.opacity = 1;
+  selMat.depthWrite = true;
+  selMat.needsUpdate = true;
   for (const b of boxes) {
     const on = b.id === selectedId;
     const mat = b.group.userData.body;
     if (on) {
       mat.emissive.set("#6b2430");
-      mat.emissiveIntensity = 0.5;
+      mat.emissiveIntensity = seeThrough ? 0.15 : 0.5;
     } else if (hangs(b)) {
       mat.emissive.set("#8a4b12");
-      mat.emissiveIntensity = 0.45;
+      mat.emissiveIntensity = seeThrough ? 0.12 : 0.45;
     } else {
       mat.emissive.set("#000000");
       mat.emissiveIntensity = 0;
     }
     b.group.userData.sel.visible = on;
+    b.group.traverse((obj) => {
+      if (!obj.material || obj.isLine) return;
+      const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+      for (const m of mats) {
+        if (m.userData?.shared) continue;
+        m.transparent = seeThrough;
+        m.opacity = seeThrough ? (obj.userData.isLabel ? 0.5 : 0.28) : 1;
+        m.depthWrite = !seeThrough;
+        m.side = seeThrough ? THREE.DoubleSide : THREE.FrontSide;
+        m.needsUpdate = true;
+      }
+    });
   }
   if (centerLine) centerLine.visible = showCenter;
   if (centerCross) centerCross.visible = showCenter;
@@ -867,7 +1037,8 @@ function updateStatus() {
     $("metrics").textContent = `Pallet ${cm(pallet.l)} × ${cm(pallet.w)} · sin cajas`;
     return;
   }
-  const levels = new Set(boxes.map((box) => Math.round((box.y - pallet.h) / BOX.h))).size;
+  const top = Math.max(...boxes.map((box) => box.y + box.h)) - pallet.h;
+  const levels = Math.max(1, Math.round(top / BOX.h));
   let equiv = 0;
   for (const box of boxes) equiv += box.kind === "madera" ? 2 : 1;
   const extra = equiv === boxes.length ? "" : ` · equivalen a ${equiv} comunes`;
@@ -945,10 +1116,19 @@ function markLibre() {
   }
 }
 
+function stackTops() {
+  const tops = new Set();
+  for (const o of boxes) {
+    const top = round2(o.y + o.h);
+    if (top > pallet.h + 0.4) tops.add(top);
+  }
+  return [...tops].sort((a, b) => a - b);
+}
+
 function findSpot(rot, level) {
-  const { sx, sz } = footprint(rot, paint.kind);
-  const y = pallet.h + level * BOX.h;
-  const h = BOX.h;
+  const { sx, sz, h } = poseOf(rot, paint.kind);
+  const tops = stackTops();
+  const y = level <= 0 ? pallet.h : tops[level - 1] ?? tops[tops.length - 1] ?? pallet.h + level * BOX.h;
   const xs = new Set([0]);
   const zs = new Set([0]);
   for (let i = 1; i * sx <= pallet.l - sx + 0.01; i++) xs.add(i * sx);
@@ -964,7 +1144,7 @@ function findSpot(rot, level) {
   const zList = [...zs].filter((z) => z >= -0.01 && z + sz <= pallet.w + 0.4).sort((a, b) => a - b);
   for (const z of zList) {
     for (const x of xList) {
-      const probe = { id: -1, x, z, rot, y, h };
+      const probe = { id: -1, x, z, rot, y, h, kind: paint.kind };
       const blocked = boxes.some((o) => overlapXZ(probe, o) && overlapY(probe, o));
       if (blocked) continue;
       if (level > 0 && !restsOn(probe)) continue;
@@ -980,24 +1160,19 @@ function overlapY(a, b) {
 
 function restsOn(probe) {
   const { sx, sz } = sizeOf(probe);
-  const cx = probe.x + sx / 2;
-  const cz = probe.z + sz / 2;
   return boxes.some((o) => {
     const s = sizeOf(o);
     const top = o.y + o.h;
-    return (
-      top <= probe.y + 0.6 &&
-      top >= probe.y - 0.6 &&
-      cx > o.x + 0.2 &&
-      cx < o.x + s.sx - 0.2 &&
-      cz > o.z + 0.2 &&
-      cz < o.z + s.sz - 0.2
-    );
+    if (top > probe.y + 0.6 || top < probe.y - 0.6) return false;
+    const overlapX = Math.min(probe.x + sx, o.x + s.sx) - Math.max(probe.x, o.x);
+    const overlapZ = Math.min(probe.z + sz, o.z + s.sz) - Math.max(probe.z, o.z);
+    return overlapX > 8 && overlapZ > 8;
   });
 }
 
 function addBox(rot) {
-  const spot = findSpot(rot, placeLevel);
+  const poseRot = isFlat(paint.kind) && rot === 2 ? 0 : rot;
+  const spot = findSpot(poseRot, placeLevel);
   if (!spot) {
     hint(
       placeLevel === 0
@@ -1012,8 +1187,8 @@ function addBox(rot) {
     x: spot.x,
     y: spot.y,
     z: spot.z,
-    rot,
-    h: BOX.h,
+    rot: poseRot,
+    h: poseOf(poseRot, paint.kind).h,
     kind: paint.kind,
     color: paint.color,
     label: paint.label,
@@ -1026,14 +1201,18 @@ function addBox(rot) {
   markLibre();
   refresh();
   hint(
-    placeLevel === 0
-      ? "Caja en la base, desde el rincón. Arrastrala si querés correrla."
-      : `Caja en el piso ${placeLevel + 1}. Girala con el botón si hace falta trabar.`
+    paint.kind === "cuatro"
+      ? "4 botellas, acostada. Casi cuadrada. Parada, el doble clic la gira para los dos lados."
+      : paint.kind === "chata"
+      ? "Chata acostada. Doble clic: de costado, parada sobre la base de la botella, o parada sobre el costado."
+      : placeLevel === 0
+        ? "Caja en la base, desde el rincón. Arrastrala si querés correrla."
+        : `Caja en el piso ${placeLevel + 1}. Girala con el botón si hace falta trabar.`
   );
 }
 
 function encimar() {
-  placeLevel = Math.min(8, placeLevel + 1);
+  placeLevel = Math.min(16, placeLevel + 1);
   updateFloorUi();
   hint(
     `Piso ${placeLevel + 1}. La próxima caja se apoya arriba. Atravesada la cruza para trabar.`
@@ -1068,7 +1247,8 @@ function rotateSelected() {
   const { sx, sz } = sizeOf(b);
   const cx = b.x + sx / 2;
   const cz = b.z + sz / 2;
-  b.rot = b.rot === 1 ? 0 : 1;
+  b.rot = ((b.rot || 0) + 1) % turnCount(b.kind);
+  b.h = poseOf(b.rot, b.kind).h;
   const n = sizeOf(b);
   b.x = round2(cx - n.sx / 2);
   b.z = round2(cz - n.sz / 2);
@@ -1081,6 +1261,32 @@ function rotateSelected() {
   activePreset = "libre";
   clearPresetHighlight();
   refresh();
+  hint(
+    b.kind === "cuatro"
+      ? [
+          "4 botellas, acostada. Casi cuadrada.",
+          "4 botellas, acostada de costado.",
+          "Parada sobre la base de la botella.",
+          "La misma parada, ahora para el otro lado.",
+          "Parada sobre el costado de la botella.",
+          "El costado, girado para el otro lado.",
+        ][b.rot] || "4 botellas."
+      : b.kind === "chata"
+      ? b.rot === 3
+        ? "Chata parada. Apoya el costado de la botella."
+        : b.rot === 2
+          ? "Chata parada. Apoya la base de la botella."
+          : b.rot === 1
+            ? "Chata acostada de costado."
+            : "Chata acostada. Las botellas quedan de lado."
+      : b.rot === 3
+        ? "Sigue acostada, ahora de costado."
+        : b.rot === 2
+          ? "Acostada. Dos así, una sobre la otra, equivalen a dos paradas juntas."
+          : b.rot === 1
+            ? "Atravesada."
+            : "Parada, de frente."
+  );
 }
 
 function removeSelected() {
@@ -1116,7 +1322,8 @@ function restore(data) {
       color: item.color,
       label: item.label || "",
     };
-    if (b.kind === "madera") b.h = BOX.h;
+    if (isFlat(b.kind) || b.rot >= 2) b.h = poseOf(b.rot || 0, b.kind).h;
+    else if (b.kind === "madera") b.h = BOX.h;
     maxId = Math.max(maxId, b.id);
     boxes.push(b);
     mount(b);
@@ -1144,8 +1351,10 @@ function redo() {
 }
 
 function updateUndoButtons() {
-  $("undo").disabled = history.length === 0;
-  $("redo").disabled = future.length === 0;
+  const noBack = history.length === 0;
+  const noForward = future.length === 0;
+  for (const id of ["undo", "undoView"]) if ($(id)) $(id).disabled = noBack;
+  for (const id of ["redo", "redoView"]) if ($(id)) $(id).disabled = noForward;
 }
 
 function clearPresetHighlight() {
@@ -1413,8 +1622,10 @@ function syncInspector() {
   for (const btn of document.querySelectorAll(".swatch")) {
     btn.classList.toggle("on", btn.dataset.color === color);
   }
-  $("kindComun").classList.toggle("active", kind !== "madera");
+  $("kindComun").classList.toggle("active", kind === "comun");
   $("kindMadera").classList.toggle("active", kind === "madera");
+  $("kindChata").classList.toggle("active", kind === "chata");
+  $("kindCuatro").classList.toggle("active", kind === "cuatro");
 }
 
 function setColor(hex) {
@@ -1445,7 +1656,7 @@ function setKind(kind) {
   pushHistory();
   const prev = { h: b.h, kind: b.kind };
   b.kind = kind;
-  b.h = BOX.h;
+  b.h = poseOf(b.rot, kind).h;
   if (boxes.some((o) => o.id !== b.id && overlap3D(b, o))) {
     b.h = prev.h;
     b.kind = prev.kind;
@@ -1529,6 +1740,64 @@ function readPalletInputs() {
   refresh();
 }
 
+let loadedCapture = "";
+
+function sceneSnapshot() {
+  return {
+    pallet: { l: pallet.l, w: pallet.w, h: pallet.h },
+    boxes: captureState(),
+    camera: {
+      x: camera.position.x,
+      y: camera.position.y,
+      z: camera.position.z,
+      tx: controls.target.x,
+      ty: controls.target.y,
+      tz: controls.target.z,
+      fov: camera.fov,
+    },
+  };
+}
+
+function applyCamera(cam) {
+  if (!cam) return;
+  camera.fov = cam.fov || 36;
+  camera.position.set(cam.x, cam.y, cam.z);
+  controls.target.set(cam.tx, cam.ty, cam.tz);
+  camera.up.set(0, 1, 0);
+  camera.updateProjectionMatrix();
+  syncControlsUp();
+  const pos = camera.position.clone();
+  const target = controls.target.clone();
+  controls.update();
+  camera.position.copy(pos);
+  controls.target.copy(target);
+  camera.lookAt(target);
+  viewName = "libre";
+  highlightView();
+}
+
+function markLoadedCapture() {
+  const label = loadedCapture ? "Actualizar captura" : "Sacar captura";
+  if ($("shot")) $("shot").textContent = label;
+  if ($("shot2")) $("shot2").textContent = loadedCapture ? "Actualizar" : "Sacar captura";
+  const note = $("shotEditing");
+  if (!note) return;
+  note.replaceChildren();
+  note.hidden = !loadedCapture;
+  if (!loadedCapture) return;
+  note.append("Estás editando esta captura. ");
+  const release = document.createElement("button");
+  release.type = "button";
+  release.textContent = "Soltar";
+  release.addEventListener("click", () => {
+    loadedCapture = "";
+    markLoadedCapture();
+    loadShots();
+    hint("La próxima va a ser una captura nueva.");
+  });
+  note.append(release);
+}
+
 function shotName() {
   const typed = ($("shotName")?.value || "").trim();
   if (typed) return typed;
@@ -1544,20 +1813,40 @@ function downloadShot(dataUrl, filename) {
   a.click();
 }
 
+function shotNote() {
+  return ($("shotNote")?.value || "").trim();
+}
+
 async function shot() {
   renderer.render(scene, camera);
   const png = renderer.domElement.toDataURL("image/png");
   const name = shotName();
+  const observacion = shotNote();
   try {
     const res = await fetch("/api/capturas", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, png }),
+      body: JSON.stringify({
+        name,
+        png,
+        observacion,
+        escena: sceneSnapshot(),
+        file: loadedCapture || "",
+      }),
     });
     if (!res.ok) throw new Error("save");
     const saved = await res.json();
-    if ($("shotName")) $("shotName").value = "";
-    hint(`Captura guardada: ${saved.file}. Queda en la carpeta capturas, para el procedimiento.`);
+    if (!loadedCapture) {
+      if ($("shotName")) $("shotName").value = "";
+      if ($("shotNote")) $("shotNote").value = "";
+    }
+    hint(
+      loadedCapture
+        ? `Captura actualizada: ${saved.file}.`
+        : observacion
+          ? `Captura y observación guardadas: ${saved.file}. Quedan en capturas, para el procedimiento.`
+          : `Captura guardada: ${saved.file}. La observación quedó vacía.`
+    );
     loadShots();
   } catch {
     const file = `${name.replace(/[^\wáéíóúñü -]+/gi, "").trim() || "estiba"}.png`;
@@ -1587,18 +1876,91 @@ async function loadShots() {
       const img = document.createElement("img");
       img.src = item.url;
       img.alt = item.name;
-      const name = document.createElement("span");
+      const text = document.createElement("div");
+      text.className = "shottext";
+      const name = document.createElement("strong");
       name.textContent = item.name;
+      text.appendChild(name);
+      if (item.observacion) {
+        const note = document.createElement("p");
+        note.textContent = item.observacion;
+        text.appendChild(note);
+      }
+      const acts = document.createElement("div");
+      acts.className = "shotacts";
+      const load = document.createElement("button");
+      load.type = "button";
+      load.textContent = "Cargar";
+      load.addEventListener("click", () => openCapture(item.file));
       const open = document.createElement("a");
       open.href = item.url;
       open.target = "_blank";
       open.rel = "noopener";
       open.textContent = "Abrir";
-      row.append(img, name, open);
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.textContent = "Borrar";
+      remove.addEventListener("click", () => deleteCapture(item.file, item.name));
+      acts.append(load, open, remove);
+      if (item.file === loadedCapture) row.classList.add("on");
+      row.append(img, text, acts);
       wrap.appendChild(row);
     }
   } catch {
     wrap.replaceChildren();
+  }
+}
+
+async function deleteCapture(file, name) {
+  const label = name || file;
+  if (!confirm(`¿Borrar la captura “${label}”? Se elimina la imagen y la observación.`)) return;
+  try {
+    const res = await fetch(`/api/capturas?archivo=${encodeURIComponent(file)}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) throw new Error("delete");
+    if (loadedCapture === file) {
+      loadedCapture = "";
+      markLoadedCapture();
+    }
+    hint("Captura borrada.");
+    loadShots();
+  } catch {
+    hint("No pude borrar esa captura.");
+  }
+}
+
+async function openCapture(file) {
+  try {
+    const res = await fetch(`/api/capturas?archivo=${encodeURIComponent(file)}`);
+    if (!res.ok) throw new Error("missing");
+    const item = await res.json();
+    if (!Array.isArray(item.escena?.boxes)) {
+      hint("Esta captura es solo la imagen. El armado no quedó guardado, así que no se puede volver a cargar.");
+      return;
+    }
+    pushHistory();
+    const scene = item.escena;
+    if (scene.pallet?.l && scene.pallet?.w) {
+      pallet.l = scene.pallet.l;
+      pallet.w = scene.pallet.w;
+      if ($("palletL")) $("palletL").value = String(pallet.l);
+      if ($("palletW")) $("palletW").value = String(pallet.w);
+      buildPallet();
+    }
+    restore(scene.boxes);
+    activePreset = "libre";
+    clearPresetHighlight();
+    applyCamera(scene.camera);
+    if ($("shotName")) $("shotName").value = item.nombre || item.name || "";
+    if ($("shotNote")) $("shotNote").value = item.observacion || "";
+    loadedCapture = item.archivo || file;
+    markLoadedCapture();
+    refresh();
+    loadShots();
+    hint("Captura cargada. Modificá la estiba y tocá Actualizar captura.");
+  } catch {
+    hint("No pude cargar esa captura.");
   }
 }
 
@@ -1642,12 +2004,15 @@ function importJson(file) {
 
 $("add").addEventListener("click", () => addBox(0));
 $("addCross").addEventListener("click", () => addBox(1));
+$("addLay").addEventListener("click", () => addBox(2));
 $("stack").addEventListener("click", encimar);
 $("downLevel").addEventListener("click", bajarPiso);
 $("rotate").addEventListener("click", rotateSelected);
 $("remove").addEventListener("click", removeSelected);
 $("undo").addEventListener("click", undo);
 $("redo").addEventListener("click", redo);
+$("undoView").addEventListener("click", undo);
+$("redoView").addEventListener("click", redo);
 $("clear").addEventListener("click", () => {
   pushHistory();
   clearBoxes();
@@ -1662,6 +2027,8 @@ $("label").addEventListener("focus", () => {
 $("label").addEventListener("input", (e) => setLabel(e.target.value));
 $("kindComun").addEventListener("click", () => setKind("comun"));
 $("kindMadera").addEventListener("click", () => setKind("madera"));
+$("kindChata").addEventListener("click", () => setKind("chata"));
+$("kindCuatro").addEventListener("click", () => setKind("cuatro"));
 $("nums").addEventListener("change", (e) => {
   showNumbers = e.target.checked;
   refresh();
@@ -1675,6 +2042,12 @@ $("dims").addEventListener("change", (e) => {
   showDims = e.target.checked;
   updateLooks();
   persist();
+});
+$("ghost").addEventListener("click", () => {
+  seeThrough = !seeThrough;
+  $("ghost").classList.toggle("active", seeThrough);
+  updateLooks();
+  hint(seeThrough ? "Cajas transparentes, con el contorno marcado." : "Cajas opacas de nuevo.");
 });
 $("overhang").addEventListener("change", (e) => {
   allowOverhang = e.target.checked;
@@ -1750,4 +2123,4 @@ function animate() {
 }
 animate();
 
-hint("Doble clic en una caja para pasarla de normal a atravesada.");
+hint("Doble clic: parada, atravesada, acostada y acostada de costado.");

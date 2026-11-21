@@ -1,0 +1,2543 @@
+[
+  {
+    "archivo": "modo-libre-pallet-vacio-libre-9.png",
+    "nombre": "Modo libre · pallet vacío · libre",
+    "observacion": "ejemplo de mala practica, en la cual tenemos cantidades que no se traban , esta forma tiene mas probabilidad que en el traslado y frenado tengan mas movimientos y puedan caer",
+    "fecha": "21/11/26, 5:15 p. m.",
+    "escena": {
+      "pallet": {
+        "l": 120,
+        "w": 100,
+        "h": 14.5
+      },
+      "boxes": [
+        {
+          "id": 856,
+          "x": 103.33333333333333,
+          "y": 47.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 857,
+          "x": 103.33,
+          "y": 47.5,
+          "z": 25,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 858,
+          "x": 103.33,
+          "y": 14.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 859,
+          "x": 103.33,
+          "y": 14.5,
+          "z": 25,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 860,
+          "x": 103.33333333333333,
+          "y": 80.5,
+          "z": 50,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 861,
+          "x": 103.33,
+          "y": 47.5,
+          "z": 75,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 862,
+          "x": 103.33333333333333,
+          "y": 47.5,
+          "z": 50,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 863,
+          "x": 103.33333333333333,
+          "y": 14.5,
+          "z": 75,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 864,
+          "x": 103.33,
+          "y": 14.5,
+          "z": 50,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        }
+      ],
+      "camera": {
+        "x": 210.29964792184674,
+        "y": 137.14384543710094,
+        "z": -185.26656948785134,
+        "tx": -8.062605112941963,
+        "ty": 43.48959877934149,
+        "tz": -9.554299102004775,
+        "fov": 36
+      }
+    }
+  },
+  {
+    "archivo": "modo-libre-pallet-vacio-libre-8.png",
+    "nombre": "Modo libre · pallet vacío · libre",
+    "observacion": "una buena practica, en un armado,,es siempre , empezar armando con las cajas atravezadas, si no tenemos traba.. reduce un porcentaje importante de que se caigan al desplazarnos , ya que de esta manera las cajas tienen mejor agarre",
+    "fecha": "21/11/26, 5:12 p. m.",
+    "escena": {
+      "pallet": {
+        "l": 120,
+        "w": 100,
+        "h": 14.5
+      },
+      "boxes": [
+        {
+          "id": 833,
+          "x": 95,
+          "y": 80.5,
+          "z": 50,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#9a7049",
+          "label": ""
+        },
+        {
+          "id": 834,
+          "x": 95,
+          "y": 47.5,
+          "z": 50,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#9a7049",
+          "label": ""
+        },
+        {
+          "id": 835,
+          "x": 95,
+          "y": 14.5,
+          "z": 50,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#9a7049",
+          "label": ""
+        },
+        {
+          "id": 836,
+          "x": 95,
+          "y": 47.5,
+          "z": 66.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 837,
+          "x": 95,
+          "y": 14.5,
+          "z": 66.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 838,
+          "x": 95,
+          "y": 47.5,
+          "z": 83.33333333333333,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#d4cfc4",
+          "label": ""
+        },
+        {
+          "id": 839,
+          "x": 95,
+          "y": 14.5,
+          "z": 83.33333333333333,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#d4cfc4",
+          "label": ""
+        },
+        {
+          "id": 840,
+          "x": 95,
+          "y": 47.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 841,
+          "x": 95,
+          "y": 47.5,
+          "z": 16.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 842,
+          "x": 95,
+          "y": 47.5,
+          "z": 33.33,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 843,
+          "x": 95,
+          "y": 14.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 844,
+          "x": 95,
+          "y": 14.5,
+          "z": 16.66,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 845,
+          "x": 95,
+          "y": 14.5,
+          "z": 33.33,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 846,
+          "x": 95,
+          "y": 80.5,
+          "z": 33.34,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        }
+      ],
+      "camera": {
+        "x": 238.25725743991515,
+        "y": 145.18314061391357,
+        "z": -179.8148893031938,
+        "tx": -11.591506601890078,
+        "ty": 38.99499035537142,
+        "tz": -4.064625810548241,
+        "fov": 36
+      }
+    }
+  },
+  {
+    "archivo": "modo-libre-pallet-vacio-libre-7.png",
+    "nombre": "Modo libre · pallet vacío · libre",
+    "observacion": "en este ejemplo vemos dos formatos de cajas chatas, una de 6 botellas y otra de 4, y la forma en las cuales se suelen posicionar para el uso correcto de los espacios, teniendo en cuenta que las cantidades mas grandes van abajo, y luego las siguientes,, para el control correcto,",
+    "fecha": "21/11/26, 4:53 p. m.",
+    "escena": {
+      "pallet": {
+        "l": 120,
+        "w": 100,
+        "h": 14.5
+      },
+      "boxes": [
+        {
+          "id": 731,
+          "x": 0,
+          "y": 14.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 732,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 733,
+          "x": 0,
+          "y": 14.5,
+          "z": 25,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 734,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 16.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 736,
+          "x": 25,
+          "y": 47.5,
+          "z": 25.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 737,
+          "x": 0,
+          "y": 47.5,
+          "z": 16.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 738,
+          "x": 0,
+          "y": 47.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 739,
+          "x": 25,
+          "y": 47.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 740,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 33.33,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 756,
+          "x": 0,
+          "y": 80.5,
+          "z": 25.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 757,
+          "x": 0,
+          "y": 47.5,
+          "z": 33.34,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 758,
+          "x": 0,
+          "y": 80.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 759,
+          "x": 16.67,
+          "y": 80.5,
+          "z": 16.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 760,
+          "x": 16.67,
+          "y": 80.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 761,
+          "x": 16.67,
+          "y": 80.5,
+          "z": 33.34,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 762,
+          "x": 0,
+          "y": 14.5,
+          "z": 75,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 763,
+          "x": 0,
+          "y": 14.5,
+          "z": 50,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 764,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 66.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 765,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 50,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 766,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 83.33,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 767,
+          "x": 0,
+          "y": 47.5,
+          "z": 66.66,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 768,
+          "x": 0,
+          "y": 47.5,
+          "z": 50.01,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 769,
+          "x": 0,
+          "y": 47.5,
+          "z": 83.33333333333333,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 770,
+          "x": 25,
+          "y": 47.5,
+          "z": 75,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 771,
+          "x": 25,
+          "y": 47.5,
+          "z": 50.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 772,
+          "x": 0,
+          "y": 80.5,
+          "z": 50,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 773,
+          "x": 16.67,
+          "y": 80.5,
+          "z": 49.99,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 774,
+          "x": 16.67,
+          "y": 80.5,
+          "z": 66.66,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 809,
+          "x": 41.66666666666667,
+          "y": 14.5,
+          "z": 49.986666666666665,
+          "rot": 0,
+          "h": 8.25,
+          "kind": "chata",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 810,
+          "x": 41.67,
+          "y": 22.75,
+          "z": 49.99,
+          "rot": 0,
+          "h": 8.25,
+          "kind": "chata",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 811,
+          "x": 41.67,
+          "y": 55.75,
+          "z": 49.99,
+          "rot": 0,
+          "h": 8.25,
+          "kind": "chata",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 812,
+          "x": 41.67,
+          "y": 31,
+          "z": 50,
+          "rot": 0,
+          "h": 8.25,
+          "kind": "chata",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 813,
+          "x": 41.67,
+          "y": 39.25,
+          "z": 50,
+          "rot": 0,
+          "h": 8.25,
+          "kind": "chata",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 814,
+          "x": 41.67,
+          "y": 47.5,
+          "z": 50,
+          "rot": 0,
+          "h": 8.25,
+          "kind": "chata",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 815,
+          "x": 41.67,
+          "y": 64,
+          "z": 50,
+          "rot": 0,
+          "h": 8.25,
+          "kind": "chata",
+          "color": "#d4cfc4",
+          "label": ""
+        },
+        {
+          "id": 817,
+          "x": 41.67,
+          "y": 72.25,
+          "z": 50,
+          "rot": 0,
+          "h": 8.25,
+          "kind": "chata",
+          "color": "#d4cfc4",
+          "label": ""
+        },
+        {
+          "id": 818,
+          "x": 41.67,
+          "y": 80.5,
+          "z": 50,
+          "rot": 0,
+          "h": 8.25,
+          "kind": "chata",
+          "color": "#d4cfc4",
+          "label": ""
+        },
+        {
+          "id": 819,
+          "x": 41.67,
+          "y": 88.75,
+          "z": 50,
+          "rot": 0,
+          "h": 8.25,
+          "kind": "chata",
+          "color": "#d4cfc4",
+          "label": ""
+        },
+        {
+          "id": 820,
+          "x": 41.67,
+          "y": 97,
+          "z": 50,
+          "rot": 0,
+          "h": 8.25,
+          "kind": "chata",
+          "color": "#9a7049",
+          "label": ""
+        },
+        {
+          "id": 821,
+          "x": 41.67,
+          "y": 105.25,
+          "z": 50,
+          "rot": 0,
+          "h": 8.25,
+          "kind": "chata",
+          "color": "#9a7049",
+          "label": ""
+        },
+        {
+          "id": 822,
+          "x": 42,
+          "y": 14.5,
+          "z": 41.74,
+          "rot": 3,
+          "h": 33.333333333333336,
+          "kind": "cuatro",
+          "color": "#6e3540",
+          "label": ""
+        },
+        {
+          "id": 823,
+          "x": 41.67,
+          "y": 47.833333333333336,
+          "z": 41.76,
+          "rot": 3,
+          "h": 33.333333333333336,
+          "kind": "cuatro",
+          "color": "#6e3540",
+          "label": ""
+        },
+        {
+          "id": 824,
+          "x": 41.67,
+          "y": 81.16666666666667,
+          "z": 41.76,
+          "rot": 3,
+          "h": 33.333333333333336,
+          "kind": "cuatro",
+          "color": "#6e3540",
+          "label": ""
+        },
+        {
+          "id": 825,
+          "x": 42,
+          "y": 14.5,
+          "z": 33.33,
+          "rot": 3,
+          "h": 33.333333333333336,
+          "kind": "cuatro",
+          "color": "#6e3540",
+          "label": ""
+        },
+        {
+          "id": 826,
+          "x": 41.67,
+          "y": 47.833333333333336,
+          "z": 33.33,
+          "rot": 3,
+          "h": 33.333333333333336,
+          "kind": "cuatro",
+          "color": "#6e3540",
+          "label": ""
+        },
+        {
+          "id": 827,
+          "x": 41.67,
+          "y": 81.16666666666667,
+          "z": 33.51,
+          "rot": 3,
+          "h": 33.333333333333336,
+          "kind": "cuatro",
+          "color": "#6e3540",
+          "label": ""
+        },
+        {
+          "id": 828,
+          "x": 41.66666666666667,
+          "y": 14.5,
+          "z": 0,
+          "rot": 0,
+          "h": 8.25,
+          "kind": "cuatro",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 829,
+          "x": 41.67,
+          "y": 22.75,
+          "z": 0.51,
+          "rot": 0,
+          "h": 8.25,
+          "kind": "cuatro",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 830,
+          "x": 42,
+          "y": 31,
+          "z": 0,
+          "rot": 0,
+          "h": 8.25,
+          "kind": "cuatro",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 831,
+          "x": 42,
+          "y": 39.25,
+          "z": 0,
+          "rot": 0,
+          "h": 8.25,
+          "kind": "cuatro",
+          "color": "#59697f",
+          "label": ""
+        }
+      ],
+      "camera": {
+        "x": 195.68146130915397,
+        "y": 169.3225410456451,
+        "z": 157.86279832468176,
+        "tx": -8.09044669830284,
+        "ty": 31.89214873709759,
+        "tz": -38.69861497347301,
+        "fov": 36
+      }
+    }
+  },
+  {
+    "archivo": "modo-libre-pallet-vacio-libre-6.png",
+    "nombre": "Modo libre · pallet vacío · libre",
+    "observacion": "en ese ejemplo vemos como se visualiza en un formato 3 de alto,, 28 marrones, 25 bordo, 5 azules 1 gris y 3 verdes,permitiendo poder controlar de lla forma correcta",
+    "fecha": "21/11/26, 4:39 p. m.",
+    "escena": {
+      "pallet": {
+        "l": 120,
+        "w": 100,
+        "h": 14.5
+      },
+      "boxes": [
+        {
+          "id": 731,
+          "x": 0,
+          "y": 14.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 732,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 733,
+          "x": 0,
+          "y": 14.5,
+          "z": 25,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 734,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 16.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 736,
+          "x": 25,
+          "y": 47.5,
+          "z": 25.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 737,
+          "x": 0,
+          "y": 47.5,
+          "z": 16.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 738,
+          "x": 0,
+          "y": 47.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 739,
+          "x": 25,
+          "y": 47.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 740,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 33.33,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 756,
+          "x": 0,
+          "y": 80.5,
+          "z": 25.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 757,
+          "x": 0,
+          "y": 47.5,
+          "z": 33.34,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 758,
+          "x": 0,
+          "y": 80.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 759,
+          "x": 16.67,
+          "y": 80.5,
+          "z": 16.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 760,
+          "x": 16.67,
+          "y": 80.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 761,
+          "x": 16.67,
+          "y": 80.5,
+          "z": 33.34,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 762,
+          "x": 0,
+          "y": 14.5,
+          "z": 75,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 763,
+          "x": 0,
+          "y": 14.5,
+          "z": 50,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 764,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 66.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 765,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 50,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 766,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 83.33,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 767,
+          "x": 0,
+          "y": 47.5,
+          "z": 66.66,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 768,
+          "x": 0,
+          "y": 47.5,
+          "z": 50.01,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 769,
+          "x": 0,
+          "y": 47.5,
+          "z": 83.33333333333333,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 770,
+          "x": 25,
+          "y": 47.5,
+          "z": 75,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 771,
+          "x": 25,
+          "y": 47.5,
+          "z": 50.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 772,
+          "x": 0,
+          "y": 80.5,
+          "z": 50,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 773,
+          "x": 16.67,
+          "y": 80.5,
+          "z": 49.99,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 774,
+          "x": 16.67,
+          "y": 80.5,
+          "z": 66.66,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 775,
+          "x": 41.66666666666667,
+          "y": 14.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 776,
+          "x": 58.33333333333334,
+          "y": 14.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 777,
+          "x": 75.00000000000001,
+          "y": 14.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 778,
+          "x": 91.67,
+          "y": 14.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 779,
+          "x": 75,
+          "y": 14.5,
+          "z": 24.99,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 780,
+          "x": 41.66666666666667,
+          "y": 14.5,
+          "z": 25,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 781,
+          "x": 58.33333333333334,
+          "y": 14.5,
+          "z": 25,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 782,
+          "x": 91.66666666666667,
+          "y": 14.5,
+          "z": 16.666666666666668,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 783,
+          "x": 91.66666666666667,
+          "y": 14.5,
+          "z": 33.33,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 784,
+          "x": 66.67,
+          "y": 47.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 785,
+          "x": 41.67,
+          "y": 47.5,
+          "z": 33.32,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 786,
+          "x": 41.67,
+          "y": 47.5,
+          "z": 16.66,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 787,
+          "x": 41.67,
+          "y": 47.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 788,
+          "x": 100,
+          "y": 47.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 789,
+          "x": 83.34,
+          "y": 47.5,
+          "z": 25.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 790,
+          "x": 66.67,
+          "y": 47.5,
+          "z": 25.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 791,
+          "x": 83.34,
+          "y": 47.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 792,
+          "x": 100,
+          "y": 47.5,
+          "z": 24.99,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 793,
+          "x": 43.33,
+          "y": 80.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 794,
+          "x": 58.34,
+          "y": 80.5,
+          "z": 24.99,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 795,
+          "x": 75,
+          "y": 80.5,
+          "z": 25.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 796,
+          "x": 76.67,
+          "y": 80.5,
+          "z": 0.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 797,
+          "x": 60,
+          "y": 80.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 798,
+          "x": 41.67,
+          "y": 80.5,
+          "z": 25.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 799,
+          "x": 91.67,
+          "y": 80.5,
+          "z": 33.34,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 800,
+          "x": 41.66666666666667,
+          "y": 14.5,
+          "z": 49.986666666666665,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 801,
+          "x": 43.33,
+          "y": 47.5,
+          "z": 49.99,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 802,
+          "x": 41.67,
+          "y": 80.5,
+          "z": 50.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 803,
+          "x": 43.33,
+          "y": 14.5,
+          "z": 75,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 804,
+          "x": 41.67,
+          "y": 47.5,
+          "z": 75,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 805,
+          "x": 16.67,
+          "y": 80.5,
+          "z": 83.33,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#d4cfc4",
+          "label": ""
+        },
+        {
+          "id": 806,
+          "x": 60,
+          "y": 14.5,
+          "z": 49.99,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 807,
+          "x": 58.34,
+          "y": 80.5,
+          "z": 50.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 808,
+          "x": 60,
+          "y": 47.5,
+          "z": 49.99,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        }
+      ],
+      "camera": {
+        "x": 203.7116241209707,
+        "y": 230.42588570764235,
+        "z": 141.27587950794518,
+        "tx": -16.692632526032302,
+        "ty": 41.69285384363488,
+        "tz": -3.5888063958724943,
+        "fov": 36
+      }
+    }
+  },
+  {
+    "archivo": "modo-libre-pallet-vacio-libre-5.png",
+    "nombre": "Modo libre · pallet vacío · libre",
+    "observacion": "en este ejemplo empezamos a ver un armado 3 de alto de un producto de 28 cajas,, como vemos , la forma correcta de estibado es siempre superponer las bases para que queden trabadas y se pueda trasladar minimizando los riesgos de caida,, vemos como los huecos dejamos hacia afuera",
+    "fecha": "21/11/26, 4:34 p. m.",
+    "escena": {
+      "pallet": {
+        "l": 120,
+        "w": 100,
+        "h": 14.5
+      },
+      "boxes": [
+        {
+          "id": 731,
+          "x": 0,
+          "y": 14.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 732,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 733,
+          "x": 0,
+          "y": 14.5,
+          "z": 25,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 734,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 16.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 736,
+          "x": 25,
+          "y": 47.5,
+          "z": 25.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 737,
+          "x": 0,
+          "y": 47.5,
+          "z": 16.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 738,
+          "x": 0,
+          "y": 47.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 739,
+          "x": 25,
+          "y": 47.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 740,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 33.33,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 756,
+          "x": 0,
+          "y": 80.5,
+          "z": 25.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 757,
+          "x": 0,
+          "y": 47.5,
+          "z": 33.34,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 758,
+          "x": 0,
+          "y": 80.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 759,
+          "x": 16.67,
+          "y": 80.5,
+          "z": 16.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 760,
+          "x": 16.67,
+          "y": 80.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 761,
+          "x": 16.67,
+          "y": 80.5,
+          "z": 33.34,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 762,
+          "x": 0,
+          "y": 14.5,
+          "z": 75,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 763,
+          "x": 0,
+          "y": 14.5,
+          "z": 50,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 764,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 66.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 765,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 50,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 766,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 83.33,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 767,
+          "x": 0,
+          "y": 47.5,
+          "z": 66.66,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 768,
+          "x": 0,
+          "y": 47.5,
+          "z": 50.01,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 769,
+          "x": 0,
+          "y": 47.5,
+          "z": 83.33333333333333,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 770,
+          "x": 25,
+          "y": 47.5,
+          "z": 75,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 771,
+          "x": 25,
+          "y": 47.5,
+          "z": 50.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 772,
+          "x": 0,
+          "y": 80.5,
+          "z": 50,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 773,
+          "x": 16.67,
+          "y": 80.5,
+          "z": 49.99,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 774,
+          "x": 16.67,
+          "y": 80.5,
+          "z": 66.66,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        }
+      ],
+      "camera": {
+        "x": 195.00730882807346,
+        "y": 226.1440653021588,
+        "z": 158.72218001250695,
+        "tx": -16.692632526032302,
+        "ty": 41.69285384363488,
+        "tz": -3.5888063958724943,
+        "fov": 36
+      }
+    }
+  },
+  {
+    "archivo": "modo-libre-pallet-vacio-libre-3.png",
+    "nombre": "Modo libre · pallet vacío · libre",
+    "observacion": "en este ejemplo se ve la forma incorrecta de dejar los espacios,, ya que si ubicamos otro producto encima ,no se sabria que hay debajo, siempre los huecos deben ir hacia afuera, para poder ser controladso y visualizados de la manera correcta",
+    "fecha": "21/11/26, 4:28 p. m.",
+    "escena": {
+      "pallet": {
+        "l": 120,
+        "w": 100,
+        "h": 14.5
+      },
+      "boxes": [
+        {
+          "id": 731,
+          "x": 0,
+          "y": 14.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 732,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 733,
+          "x": 0,
+          "y": 14.5,
+          "z": 25,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 734,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 16.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 735,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 33.34,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 736,
+          "x": 0,
+          "y": 47.5,
+          "z": 33.34,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 737,
+          "x": 0,
+          "y": 47.5,
+          "z": 16.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 738,
+          "x": 0,
+          "y": 47.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 739,
+          "x": 25,
+          "y": 47.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 740,
+          "x": 25,
+          "y": 47.5,
+          "z": 25.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 741,
+          "x": 0,
+          "y": 47.5,
+          "z": 66.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 742,
+          "x": 0,
+          "y": 14.5,
+          "z": 83.33333333333333,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 743,
+          "x": 0,
+          "y": 47.5,
+          "z": 50,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 744,
+          "x": 0,
+          "y": 14.5,
+          "z": 66.68,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 745,
+          "x": 0,
+          "y": 14.5,
+          "z": 50.01,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 746,
+          "x": 25,
+          "y": 47.5,
+          "z": 75,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 747,
+          "x": 25,
+          "y": 14.5,
+          "z": 75,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 748,
+          "x": 25,
+          "y": 14.5,
+          "z": 50,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#d4cfc4",
+          "label": ""
+        },
+        {
+          "id": 749,
+          "x": 41.66666666666667,
+          "y": 14.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 750,
+          "x": 58.33333333333334,
+          "y": 14.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 751,
+          "x": 41.67,
+          "y": 47.5,
+          "z": 25.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 752,
+          "x": 58.33,
+          "y": 47.5,
+          "z": 0.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 753,
+          "x": 41.66666666666667,
+          "y": 14.5,
+          "z": 25,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 754,
+          "x": 58.33333333333334,
+          "y": 14.5,
+          "z": 25,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 755,
+          "x": 41.67,
+          "y": 47.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        }
+      ],
+      "camera": {
+        "x": 177.04289341476078,
+        "y": 197.89309559913502,
+        "z": 91.41845663493147,
+        "tx": -5.428613715213137,
+        "ty": 29.219837030229517,
+        "tz": -0.9214097796503676,
+        "fov": 36
+      }
+    }
+  },
+  {
+    "archivo": "modo-libre-pallet-vacio-libre-2.png",
+    "nombre": "Modo libre · pallet vacío · libre",
+    "observacion": "aca vemos armado como lleva una poanilla armada con 10 cajas marrones, 5 violetas, 2 azules, 1 gris, y 7 verdes. como se veria en 2 de alto,, con los espacios o huecos hacia afuera... lo de los colores es una forma de ejemplo para que se entienda.. siempre del centro hacia afuera los huecos para  respetar las normas y se pueda ejercer el control correcto",
+    "fecha": "21/11/26, 4:27 p. m.",
+    "escena": {
+      "pallet": {
+        "l": 120,
+        "w": 100,
+        "h": 14.5
+      },
+      "boxes": [
+        {
+          "id": 731,
+          "x": 0,
+          "y": 14.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 732,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 733,
+          "x": 0,
+          "y": 14.5,
+          "z": 25,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 734,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 16.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 735,
+          "x": 16.67,
+          "y": 14.5,
+          "z": 33.34,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 736,
+          "x": 0,
+          "y": 47.5,
+          "z": 33.34,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 737,
+          "x": 0,
+          "y": 47.5,
+          "z": 16.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 738,
+          "x": 0,
+          "y": 47.5,
+          "z": 0,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 739,
+          "x": 25,
+          "y": 47.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 740,
+          "x": 25,
+          "y": 47.5,
+          "z": 25.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#c4a36e",
+          "label": ""
+        },
+        {
+          "id": 741,
+          "x": 0,
+          "y": 47.5,
+          "z": 66.67,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 742,
+          "x": 0,
+          "y": 14.5,
+          "z": 83.33333333333333,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 743,
+          "x": 0,
+          "y": 47.5,
+          "z": 50,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 744,
+          "x": 0,
+          "y": 14.5,
+          "z": 66.68,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 745,
+          "x": 0,
+          "y": 14.5,
+          "z": 50.01,
+          "rot": 1,
+          "h": 33,
+          "kind": "comun",
+          "color": "#8a4548",
+          "label": ""
+        },
+        {
+          "id": 746,
+          "x": 25,
+          "y": 14.5,
+          "z": 50,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 747,
+          "x": 25,
+          "y": 47.5,
+          "z": 50.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#59697f",
+          "label": ""
+        },
+        {
+          "id": 748,
+          "x": 25,
+          "y": 14.5,
+          "z": 75,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#d4cfc4",
+          "label": ""
+        },
+        {
+          "id": 749,
+          "x": 41.66666666666667,
+          "y": 14.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 750,
+          "x": 58.33333333333334,
+          "y": 14.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 751,
+          "x": 41.67,
+          "y": 47.5,
+          "z": 25.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 752,
+          "x": 58.33,
+          "y": 47.5,
+          "z": 25.01,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 753,
+          "x": 41.66666666666667,
+          "y": 14.5,
+          "z": 25,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 754,
+          "x": 58.33333333333334,
+          "y": 14.5,
+          "z": 25,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        },
+        {
+          "id": 755,
+          "x": 41.67,
+          "y": 47.5,
+          "z": 0,
+          "rot": 0,
+          "h": 33,
+          "kind": "comun",
+          "color": "#6a764e",
+          "label": ""
+        }
+      ],
+      "camera": {
+        "x": 177.04289341476078,
+        "y": 197.89309559913502,
+        "z": 91.41845663493147,
+        "tx": -5.428613715213137,
+        "ty": 29.219837030229517,
+        "tz": -0.9214097796503676,
+        "fov": 36
+      }
+    }
+  },
+  {
+    "archivo": "modo-libre-pallet-vacio-libre-4.png",
+    "nombre": "Modo libre · pallet vacío · libre",
+    "observacion": "en este ejmplo vamos mostrando como queda la misma estiba anterior pero con un producto marron mas de 7 y encima uno gris de 2 cajas... asi va mostrnaod como va quedando completo por un lado y permite un control correcto",
+    "fecha": "21/11/26, 4:03 p. m."
+  },
+  {
+    "archivo": "3-pisos-trabados-84-libre.png",
+    "nombre": "3 pisos trabados · 84 · libre",
+    "observacion": "pallet en 3 de alto, 84 cajas",
+    "fecha": "21/11/26, 3:46 p. m."
+  },
+  {
+    "archivo": "2-pisos-trabados-56-libre.png",
+    "nombre": "2 pisos trabados · 56 · libre",
+    "observacion": "Pallet en 2 de alto, 56 cajas",
+    "fecha": "21/11/26, 3:45 p. m."
+  },
+  {
+    "archivo": "base-normal-28-cajas-tres.png",
+    "nombre": "Base normal · 28 cajas · tres",
+    "observacion": "ejemplo 2 de la base",
+    "fecha": "21/11/26, 3:45 p. m."
+  },
+  {
+    "archivo": "modo-libre-pallet-vacio-libre.png",
+    "nombre": "Modo libre · pallet vacío · libre",
+    "observacion": "para tener en cuenta, en los calculos de armado,, debemos saber que en una base de cajas estandard en el pallet entran 28, osea 14 por lado, y 7 por cuarto. ejemplo 1",
+    "fecha": "21/11/26, 3:44 p. m."
+  }
+]

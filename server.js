@@ -50,18 +50,137 @@ function send(res, status, body, type) {
   res.end(body);
 }
 
+const indexPath = path.join(capturas, "indice.json");
+
+function readIndex() {
+  try {
+    const data = JSON.parse(fs.readFileSync(indexPath, "utf8"));
+    return Array.isArray(data) ? data : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeDocumentation(items) {
+  const lines = [
+    "# Capturas para el procedimiento",
+    "",
+    "Cada imagen está en esta carpeta. La observación es lo que esa imagen tiene que transmitir cuando se arme o se mejore el instructivo.",
+    "",
+  ];
+  for (const item of items) {
+    lines.push(`## ${item.nombre}`);
+    lines.push("");
+    lines.push(`- Imagen: \`${item.archivo}\``);
+    lines.push(`- Fecha: ${item.fecha}`);
+    lines.push("");
+    lines.push(item.observacion || "_Sin observación._");
+    lines.push("");
+  }
+  fs.writeFileSync(path.join(capturas, "documentacion.md"), `${lines.join("\n")}\n`, "utf8");
+}
+
+function forgetCaptura(file) {
+  const target = path.join(capturas, file);
+  const hadFile = fs.existsSync(target);
+  if (hadFile) fs.unlinkSync(target);
+  const before = readIndex();
+  const hadNote = before.some((item) => item.archivo === file);
+  const files = new Set(
+    fs
+      .readdirSync(capturas)
+      .filter((name) => name.toLowerCase().endsWith(".png"))
+  );
+  const items = before.filter((item) => files.has(item.archivo) && item.archivo !== file);
+  fs.writeFileSync(indexPath, JSON.stringify(items, null, 2), "utf8");
+  writeDocumentation(items);
+  return hadFile || hadNote;
+}
+
+function rememberCaptura(entry) {
+  const files = new Set(
+    fs
+      .readdirSync(capturas)
+      .filter((file) => file.toLowerCase().endsWith(".png"))
+  );
+  const items = readIndex().filter(
+    (item) => files.has(item.archivo) && item.archivo !== entry.archivo
+  );
+  items.unshift(entry);
+  fs.writeFileSync(indexPath, JSON.stringify(items, null, 2), "utf8");
+  writeDocumentation(items);
+}
+
 function listCapturas() {
+  const notes = new Map(readIndex().map((item) => [item.archivo, item]));
   return fs
     .readdirSync(capturas)
     .filter((file) => file.toLowerCase().endsWith(".png"))
-    .map((file) => ({
-      file,
-      name: file.replace(/\.png$/i, ""),
-      url: `/capturas/${encodeURIComponent(file)}`,
-      mtime: fs.statSync(path.join(capturas, file)).mtimeMs,
-    }))
+    .map((file) => {
+      const note = notes.get(file);
+      return {
+        file,
+        name: note?.nombre || file.replace(/\.png$/i, ""),
+        url: `/capturas/${encodeURIComponent(file)}`,
+        observacion: note?.observacion || "",
+        fecha: note?.fecha || "",
+        tieneEscena: Array.isArray(note?.escena?.boxes),
+        mtime: fs.statSync(path.join(capturas, file)).mtimeMs,
+      };
+    })
     .sort((a, b) => b.mtime - a.mtime)
-    .map(({ name, url, file }) => ({ name, url, file }));
+    .map(({ name, url, file, observacion, fecha, tieneEscena }) => ({
+      name,
+      url,
+      file,
+      observacion,
+      fecha,
+      tieneEscena,
+    }));
+}
+
+function shotFile(raw) {
+  const file = path.basename(String(raw || ""));
+  if (!/^[\w.-]+\.png$/i.test(file)) return "";
+  return file;
+}
+
+function numberOr(value, fallback) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : fallback;
+}
+
+function sceneFrom(data) {
+  if (!data || !Array.isArray(data.boxes)) return null;
+  return {
+    pallet: {
+      l: numberOr(data.pallet?.l, 120),
+      w: numberOr(data.pallet?.w, 100),
+      h: numberOr(data.pallet?.h, 14.5),
+    },
+    boxes: data.boxes.slice(0, 500).map((b, i) => ({
+      id: numberOr(b.id, i + 1),
+      x: numberOr(b.x, 0),
+      y: numberOr(b.y, 0),
+      z: numberOr(b.z, 0),
+      rot: numberOr(b.rot, 0),
+      h: numberOr(b.h, 0),
+      kind: ["comun", "madera", "chata", "cuatro"].includes(b.kind) ? b.kind : "comun",
+      color: typeof b.color === "string" ? b.color.slice(0, 20) : "",
+      label: typeof b.label === "string" ? b.label.slice(0, 18) : "",
+    })),
+    camera: data.camera
+      ? {
+          x: numberOr(data.camera.x, 90),
+          y: numberOr(data.camera.y, 120),
+          z: numberOr(data.camera.z, -170),
+          tx: numberOr(data.camera.tx, 0),
+          ty: numberOr(data.camera.ty, 18),
+          tz: numberOr(data.camera.tz, 0),
+          fov: numberOr(data.camera.fov, 36),
+        }
+      : null,
+  };
 }
 
 function readBody(req) {
@@ -100,7 +219,30 @@ function serveFile(res, filePath) {
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://localhost:${port}`);
   if (url.pathname === "/api/capturas" && req.method === "GET") {
+    const archivo = shotFile(url.searchParams.get("archivo"));
+    if (url.searchParams.has("archivo")) {
+      const item = archivo && readIndex().find((entry) => entry.archivo === archivo);
+      if (!item) {
+        send(res, 404, "no está");
+        return;
+      }
+      send(res, 200, JSON.stringify(item), "application/json; charset=utf-8");
+      return;
+    }
     send(res, 200, JSON.stringify(listCapturas()), "application/json; charset=utf-8");
+    return;
+  }
+  if (url.pathname === "/api/capturas" && req.method === "DELETE") {
+    const archivo = shotFile(url.searchParams.get("archivo"));
+    if (!archivo) {
+      send(res, 400, "falta el archivo");
+      return;
+    }
+    if (!forgetCaptura(archivo)) {
+      send(res, 404, "no está");
+      return;
+    }
+    send(res, 200, JSON.stringify({ file: archivo }), "application/json; charset=utf-8");
     return;
   }
   if (url.pathname === "/api/capturas" && req.method === "POST") {
@@ -112,12 +254,31 @@ const server = http.createServer(async (req, res) => {
         send(res, 400, "falta la imagen");
         return;
       }
-      const file = uniqueFile(safeName(data.name));
+      const replace = shotFile(data.file);
+      const file =
+        replace && fs.existsSync(path.join(capturas, replace))
+          ? replace
+          : uniqueFile(safeName(data.name));
+      const observacion = String(data.observacion || "")
+        .replace(/\r\n/g, "\n")
+        .trim()
+        .slice(0, 800);
+      const nombre = String(data.name || file).trim().slice(0, 80) || file;
       fs.writeFileSync(path.join(capturas, file), Buffer.from(match[1], "base64"));
+      rememberCaptura({
+        archivo: file,
+        nombre,
+        observacion,
+        fecha: new Date().toLocaleString("es-AR", {
+          dateStyle: "short",
+          timeStyle: "short",
+        }),
+        escena: sceneFrom(data.escena),
+      });
       send(
         res,
         200,
-        JSON.stringify({ file, url: `/capturas/${encodeURIComponent(file)}` }),
+        JSON.stringify({ file, url: `/capturas/${encodeURIComponent(file)}`, observacion }),
         "application/json; charset=utf-8"
       );
     } catch {

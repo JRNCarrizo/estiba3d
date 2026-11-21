@@ -65,7 +65,7 @@
     .row { display: flex; gap: 8px; }
     .row > * { flex: 1; }
     label.field { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); }
-    input[type="number"], input[type="text"] {
+    input[type="number"], input[type="text"], textarea {
       width: 100%;
       border: 1px solid #d5cdc0;
       background: #fff;
@@ -74,7 +74,8 @@
       font: inherit;
       color: var(--ink);
     }
-    input:focus { outline: 2px solid #e4c8c6; border-color: var(--wine); }
+    textarea { resize: vertical; min-height: 68px; line-height: 1.35; }
+    input:focus, textarea:focus { outline: 2px solid #e4c8c6; border-color: var(--wine); }
     button, .filebtn {
       border: 1px solid #d7cfc2;
       background: #fff;
@@ -110,7 +111,7 @@
       padding: 0;
     }
     .swatch.on { box-shadow: 0 0 0 2px var(--wine); }
-    .kinds { display: flex; gap: 6px; }
+    .kinds { display: flex; gap: 6px; flex-wrap: wrap; }
     .kinds button { text-align: center; padding: 7px 6px; font-size: 12.5px; }
     .checks { display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
     .checks label { display: flex; gap: 8px; align-items: center; cursor: pointer; }
@@ -121,15 +122,26 @@
       display: grid;
       grid-template-columns: 76px 1fr auto;
       gap: 8px;
-      align-items: center;
+      align-items: start;
       font-size: 12px;
     }
     .shotitem img {
       width: 76px; height: 48px; object-fit: cover;
       border-radius: 6px; background: #e7e0d4; border: 1px solid var(--line);
     }
-    .shotitem span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .shotitem a { color: var(--wine); font-weight: 650; }
+    .shottext { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+    .shottext strong { font-weight: 650; }
+    .shottext p { margin: 0; color: var(--muted); white-space: pre-wrap; }
+    .shotitem a, .shotacts button {
+      color: var(--wine);
+      font-weight: 650;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      text-align: right;
+    }
+    .shotacts { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
+    .shotitem.on { box-shadow: inset 0 0 0 1px var(--wine); border-radius: 8px; }
     #detail {
       min-height: 3.2em;
       font-size: 12.5px;
@@ -168,6 +180,22 @@
     body.foto aside, body.foto #status { display: none; }
     body.foto #floatbar { display: flex; }
     #floatbar button { background: rgba(247, 244, 238, 0.94); text-align: center; }
+    #historybar {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 2;
+      display: flex;
+      gap: 8px;
+    }
+    body.foto #historybar { top: 56px; }
+    #historybar button {
+      background: rgba(247, 244, 238, 0.94);
+      text-align: center;
+      font-weight: 650;
+      box-shadow: var(--shadow);
+      padding: 8px 12px;
+    }
     details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; }
     details p { margin: 6px 0 0; font-size: 12.5px; color: #433d36; }
   </style>
@@ -185,7 +213,10 @@
       Así la base de 6 y la traba de arriba cierran en el mismo cuadrado, sin sobresalir.<br />
       De frente entran 7 cajas (116,7 cm, centradas en los 120) y hay 4 filas de 25 cm, justas en los 100 cm.
       La base normal es de <strong>28</strong>. La de 14 es la mitad de esa base, y una fila de 7, un cuarto.
-      El pallet es el de <strong>120 × 100 cm</strong>.
+      El pallet es el de <strong>120 × 100 cm</strong>.<br />
+      La <strong>chata</strong> va acostada, con las botellas una al lado de la otra. Cubre dos cajas de frente y dos filas (33,3 × 50 cm) y mide 8,3 cm de alto: cada cuatro apiladas dan el alto de una común. En dos altos entran 8, y en tres, 12.
+      Doble clic la deja de costado, después parada sobre la base de la botella (alto 33,3 cm) y, un clic más, parada sobre el costado (alto 50 cm).<br />
+      La de <strong>4 botellas</strong> es la misma idea, casi cuadrada: acostada mide 33,3 × 33 cm y 8,3 cm de alto. Parada, el doble clic la gira para los dos lados.
     </div>
 
     <div>
@@ -206,15 +237,18 @@
       <div class="kinds" style="margin-top: 8px">
         <button type="button" id="kindComun" class="active">Común · 33 cm</button>
         <button type="button" id="kindMadera">Madera · dos al lado</button>
+        <button type="button" id="kindChata">Chata · de lado</button>
+        <button type="button" id="kindCuatro">4 botellas</button>
       </div>
       <label class="field" style="margin-top: 8px">Texto de la etiqueta
         <input id="label" type="text" maxlength="18" placeholder="Ej. Malbec 2022" />
       </label>
     </div>
 
-    <div class="row">
+    <div class="row" style="flex-wrap: wrap">
       <button type="button" class="primary" id="add">Normal</button>
       <button type="button" class="primary" id="addCross">Atravesada</button>
+      <button type="button" class="primary" id="addLay">Acostada</button>
     </div>
     <div class="row">
       <button type="button" id="stack">Encimar</button>
@@ -251,6 +285,7 @@
         <label><input type="checkbox" id="dims" checked /> Medidas en la escena</label>
         <label><input type="checkbox" id="overhang" /> Permitir que la caja sobresalga</label>
       </div>
+      <button type="button" id="ghost" style="margin-top: 8px; text-align: center">Ver a través</button>
     </div>
 
     <div>
@@ -258,12 +293,16 @@
       <label class="field">Nombre
         <input id="shotName" type="text" maxlength="48" placeholder="Ej. base de 6 en el rincón" />
       </label>
+      <label class="field" style="margin-top: 8px">Observación
+        <textarea id="shotNote" maxlength="800" rows="3" placeholder="Qué tiene que transmitir esta imagen"></textarea>
+      </label>
       <div class="row" style="margin-top: 8px">
         <button type="button" class="primary" id="shot">Sacar captura</button>
         <button type="button" id="foto">Pantalla limpia</button>
       </div>
       <div id="shots"></div>
-      <p class="keys">Cada captura queda en la carpeta capturas del proyecto, para pegarla en el instructivo cuando haga falta.</p>
+      <p class="keys">La imagen, la observación y el armado quedan en la carpeta capturas. Con Cargar volvés a abrir esa estiba para modificarla. Borrar la saca de la carpeta.</p>
+      <p class="keys" id="shotEditing" hidden></p>
     </div>
     <div class="row">
       <button type="button" class="ghost" id="export">Guardar estiba</button>
@@ -275,12 +314,16 @@
       <summary>Cómo se arma, según el procedimiento</summary>
       <p>La base sale del centro del pallet hacia un costado. Los huecos del piso de arriba quedan hacia afuera, para contar desde el centro. El piso siguiente va en posición opuesta, para trabar. Las etiquetas tienen que quedar a la vista.</p>
     </details>
-    <p class="keys">Arrastrá una caja para moverla. Doble clic la pasa de normal a atravesada. Encimar sube un piso · R gira · Supr borra · flechas mueven 1 cm · Ctrl+Z deshace.</p>
+    <p class="keys">Arrastrá una caja para moverla. La rueda sube y baja la vista · Ctrl+rueda acerca · el arrastre gira. Doble clic: parada, atravesada, acostada y acostada de costado. Encimar sube · R gira · Supr borra · flechas mueven 1 cm · Ctrl+Z deshace.</p>
   </aside>
 
   <div id="stage">
     <div id="view">
       <canvas id="c"></canvas>
+      <div id="historybar">
+        <button type="button" id="undoView" disabled title="Movimiento anterior">← Atrás</button>
+        <button type="button" id="redoView" disabled title="Movimiento siguiente">Adelante →</button>
+      </div>
       <div id="floatbar">
         <button type="button" data-view="tres">Tres cuartos</button>
         <button type="button" data-view="frente">Frente</button>
@@ -295,6 +338,6 @@
       <span id="hint"></span>
     </div>
   </div>
-  <script type="module" src="./app.js?v=6"></script>
+  <script type="module" src="./app.js?v=21"></script>
 </body>
 </html>
