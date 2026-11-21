@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estiba 3D</title>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./node_modules/three/build/three.module.js",
+      "three/addons/": "./node_modules/three/examples/jsm/"
+    }
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #e6dfd2;
+      --panel: #f7f4ee;
+      --ink: #2b261f;
+      --muted: #6f675c;
+      --line: #e0d8cb;
+      --wine: #7a2f38;
+      --wine-soft: #f6e8e6;
+      --shadow: 0 10px 30px rgba(60, 40, 20, 0.08);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      display: grid;
+      grid-template-columns: 332px 1fr;
+      height: 100vh;
+      overflow: hidden;
+      color: var(--ink);
+      background: var(--bg);
+      font: 14px/1.4 "Segoe UI", system-ui, sans-serif;
+    }
+    aside {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 16px 16px 20px;
+      background: var(--panel);
+      border-right: 1px solid var(--line);
+      overflow: auto;
+    }
+    h1 { font-size: 20px; margin: 0; letter-spacing: -0.02em; }
+    .sub { color: var(--muted); margin: 2px 0 0; font-size: 12.5px; }
+    .note {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 12.5px;
+      color: #433d36;
+    }
+    .note strong { color: var(--ink); }
+    h2 {
+      margin: 12px 0 6px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 650;
+    }
+    .row { display: flex; gap: 8px; }
+    .row > * { flex: 1; }
+    label.field { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); }
+    input[type="number"], input[type="text"] {
+      width: 100%;
+      border: 1px solid #d5cdc0;
+      background: #fff;
+      border-radius: 8px;
+      padding: 7px 8px;
+      font: inherit;
+      color: var(--ink);
+    }
+    input:focus { outline: 2px solid #e4c8c6; border-color: var(--wine); }
+    button, .filebtn {
+      border: 1px solid #d7cfc2;
+      background: #fff;
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font: inherit;
+      cursor: pointer;
+      text-align: left;
+    }
+    button:hover { border-color: #c4b6a4; background: #fffdf9; }
+    button:disabled { opacity: 0.45; cursor: default; }
+    button.primary {
+      background: var(--wine);
+      border-color: var(--wine);
+      color: #fff;
+      font-weight: 650;
+      text-align: center;
+    }
+    button.primary:hover { background: #682830; }
+    button.active {
+      border-color: var(--wine);
+      background: var(--wine-soft);
+      color: var(--wine);
+      font-weight: 650;
+    }
+    button.ghost { text-align: center; }
+    .swatches { display: flex; gap: 6px; flex-wrap: wrap; }
+    .swatch {
+      width: 26px; height: 26px; border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px #cfc6b8;
+      padding: 0;
+    }
+    .swatch.on { box-shadow: 0 0 0 2px var(--wine); }
+    .kinds { display: flex; gap: 6px; }
+    .kinds button { text-align: center; padding: 7px 6px; font-size: 12.5px; }
+    .checks { display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
+    .checks label { display: flex; gap: 8px; align-items: center; cursor: pointer; }
+    #presets { display: flex; flex-direction: column; gap: 10px; }
+    .group { display: flex; flex-direction: column; gap: 6px; }
+    #shots { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+    .shotitem {
+      display: grid;
+      grid-template-columns: 76px 1fr auto;
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+    }
+    .shotitem img {
+      width: 76px; height: 48px; object-fit: cover;
+      border-radius: 6px; background: #e7e0d4; border: 1px solid var(--line);
+    }
+    .shotitem span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .shotitem a { color: var(--wine); font-weight: 650; }
+    #detail {
+      min-height: 3.2em;
+      font-size: 12.5px;
+      color: #433d36;
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+    }
+    .keys { color: var(--muted); font-size: 12px; margin: 0; }
+    #stage { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+    #view { position: relative; flex: 1; min-height: 0; }
+    #c { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    #status {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding: 8px 14px;
+      background: #f7f4ee;
+      border-top: 1px solid var(--line);
+      font-size: 13px;
+    }
+    #hint { color: var(--muted); }
+    #floatbar {
+      display: none;
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      z-index: 2;
+      gap: 8px;
+      align-items: center;
+    }
+    body.foto { grid-template-columns: 1fr; }
+    body.foto aside, body.foto #status { display: none; }
+    body.foto #floatbar { display: flex; }
+    #floatbar button { background: rgba(247, 244, 238, 0.94); text-align: center; }
+    details summary { cursor: pointer; color: var(--muted); font-size: 12.5px; }
+    details p { margin: 6px 0 0; font-size: 12.5px; color: #433d36; }
+  </style>
+</head>
+<body>
+  <aside>
+    <header>
+      <h1>Estiba 3D</h1>
+      <p class="sub">Armado de pallet para el procedimiento del depósito</p>
+    </header>
+
+    <div class="note">
+      <strong>Caja parada: alto 33 cm, base 16,67 × 25 cm.</strong> Las botellas van de pie.<br />
+      El lado chico es 16,67 cm (50 ÷ 3) para que 3 cajas de frente midan 50 cm, igual que 2 cajas de lado.
+      Así la base de 6 y la traba de arriba cierran en el mismo cuadrado, sin sobresalir.<br />
+      De frente entran 7 cajas (116,7 cm, centradas en los 120) y hay 4 filas de 25 cm, justas en los 100 cm.
+      La base normal es de <strong>28</strong>. La de 14 es la mitad de esa base, y una fila de 7, un cuarto.
+      El pallet es el de <strong>120 × 100 cm</strong>.
+    </div>
+
+    <div>
+      <h2>Pallet</h2>
+      <div class="row">
+        <label class="field">Largo (cm)
+          <input id="palletL" type="number" min="80" max="400" step="1" value="120" />
+        </label>
+        <label class="field">Ancho (cm)
+          <input id="palletW" type="number" min="40" max="200" step="1" value="100" />
+        </label>
+      </div>
+    </div>
+
+    <div>
+      <h2>Caja nueva o seleccionada</h2>
+      <div class="swatches" id="swatches"></div>
+      <div class="kinds" style="margin-top: 8px">
+        <button type="button" id="kindComun" class="active">Común · 33 cm</button>
+        <button type="button" id="kindMadera">Madera · dos al lado</button>
+      </div>
+      <label class="field" style="margin-top: 8px">Texto de la etiqueta
+        <input id="label" type="text" maxlength="18" placeholder="Ej. Malbec 2022" />
+      </label>
+    </div>
+
+    <div class="row">
+      <button type="button" class="primary" id="add">Normal</button>
+      <button type="button" class="primary" id="addCross">Atravesada</button>
+    </div>
+    <div class="row">
+      <button type="button" id="stack">Encimar</button>
+      <button type="button" id="downLevel" disabled>Bajar piso</button>
+    </div>
+    <div class="row">
+      <button type="button" id="rotate">Girar</button>
+      <button type="button" id="remove">Borrar</button>
+    </div>
+    <p class="keys" id="floorLabel">Las cajas nuevas van en la base, desde el rincón de adelante.</p>
+    <div class="row">
+      <button type="button" class="ghost" id="undo" disabled>Deshacer</button>
+      <button type="button" class="ghost" id="redo" disabled>Rehacer</button>
+      <button type="button" class="ghost" id="clear">Vaciar</button>
+    </div>
+
+    <div>
+      <h2>Ejemplos de estiba</h2>
+      <div id="presets"></div>
+      <div id="detail"></div>
+    </div>
+
+    <div>
+      <h2>Vista</h2>
+      <div class="row" style="flex-wrap: wrap">
+        <button type="button" data-view="tres" class="active">Tres cuartos</button>
+        <button type="button" data-view="frente">Frente</button>
+        <button type="button" data-view="lateral">Lateral</button>
+        <button type="button" data-view="arriba">Arriba</button>
+      </div>
+      <div class="checks" style="margin-top: 8px">
+        <label><input type="checkbox" id="nums" /> Números (se cuentan desde el centro)</label>
+        <label><input type="checkbox" id="center" checked /> Líneas de centro</label>
+        <label><input type="checkbox" id="dims" checked /> Medidas en la escena</label>
+        <label><input type="checkbox" id="overhang" /> Permitir que la caja sobresalga</label>
+      </div>
+    </div>
+
+    <div>
+      <h2>Capturas para el procedimiento</h2>
+      <label class="field">Nombre
+        <input id="shotName" type="text" maxlength="48" placeholder="Ej. base de 6 en el rincón" />
+      </label>
+      <div class="row" style="margin-top: 8px">
+        <button type="button" class="primary" id="shot">Sacar captura</button>
+        <button type="button" id="foto">Pantalla limpia</button>
+      </div>
+      <div id="shots"></div>
+      <p class="keys">Cada captura queda en la carpeta capturas del proyecto, para pegarla en el instructivo cuando haga falta.</p>
+    </div>
+    <div class="row">
+      <button type="button" class="ghost" id="export">Guardar estiba</button>
+      <button type="button" class="ghost" id="import">Abrir estiba</button>
+      <input id="file" type="file" accept="application/json" hidden />
+    </div>
+
+    <details>
+      <summary>Cómo se arma, según el procedimiento</summary>
+      <p>La base sale del centro del pallet hacia un costado. Los huecos del piso de arriba quedan hacia afuera, para contar desde el centro. El piso siguiente va en posición opuesta, para trabar. Las etiquetas tienen que quedar a la vista.</p>
+    </details>
+    <p class="keys">Arrastrá una caja para moverla. Doble clic la pasa de normal a atravesada. Encimar sube un piso · R gira · Supr borra · flechas mueven 1 cm · Ctrl+Z deshace.</p>
+  </aside>
+
+  <div id="stage">
+    <div id="view">
+      <canvas id="c"></canvas>
+      <div id="floatbar">
+        <button type="button" data-view="tres">Tres cuartos</button>
+        <button type="button" data-view="frente">Frente</button>
+        <button type="button" data-view="lateral">Lateral</button>
+        <button type="button" data-view="arriba">Arriba</button>
+        <button type="button" id="shot2">Sacar captura</button>
+        <button type="button" id="foto2">Volver</button>
+      </div>
+    </div>
+    <div id="status">
+      <span id="metrics">—</span>
+      <span id="hint"></span>
+    </div>
+  </div>
+  <script type="module" src="./app.js?v=6"></script>
+</body>
+</html>
