@@ -4,17 +4,24 @@ Cada imagen está en esta carpeta. La observación es lo que esa imagen tiene qu
 
 ## Modo libre · pallet vacío · libre
 
+- Imagen: `modo-libre-pallet-vacio-libre-8.png`
+- Fecha: 21/11/26, 11:22 p. m.
+
+una buena practica, en un armado,,es siempre , empezar armando con las cajas atravezadas, si no tenemos traba.. reduce un porcentaje importante de que se caigan al desplazarnos , ya que de esta manera las cajas tienen mejor agarre
+
+## Modo libre · pallet vacío · libre
+
+- Imagen: `modo-libre-pallet-vacio-libre-10.png`
+- Fecha: 21/11/26, 8:57 p. m.
+
+nueva imagen numero 1
+
+## Modo libre · pallet vacío · libre
+
 - Imagen: `modo-libre-pallet-vacio-libre-9.png`
 - Fecha: 21/11/26, 5:15 p. m.
 
 ejemplo de mala practica, en la cual tenemos cantidades que no se traban , esta forma tiene mas probabilidad que en el traslado y frenado tengan mas movimientos y puedan caer
-
-## Modo libre · pallet vacío · libre
-
-- Imagen: `modo-libre-pallet-vacio-libre-8.png`
-- Fecha: 21/11/26, 5:12 p. m.
-
-una buena practica, en un armado,,es siempre , empezar armando con las cajas atravezadas, si no tenemos traba.. reduce un porcentaje importante de que se caigan al desplazarnos , ya que de esta manera las cajas tienen mejor agarre
 
 ## Modo libre · pallet vacío · libre
 
